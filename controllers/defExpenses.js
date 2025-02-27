@@ -28,6 +28,67 @@ const addDefExpense = async (req, res) => {
   }
 };
 
+const updateDefExpenseByTruckId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      truckId,
+      addedBy,
+      date,
+      currentKM,
+      litres,
+      cost,
+      note,
+    } = req.body;
+    const file = req.file;
+
+    // Validate the fuel ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid def expense ID" });
+    }
+    
+
+    // Update the invoice URL if a new file is provided
+    let invoiceURL = req.body.invoiceURL;
+    if (file) {
+      invoiceURL = await uploadInvoice(file);
+    }
+
+    // Update the def
+    const updatedDef = await DefExpense.findByIdAndUpdate(
+      { _id: id },
+      {
+        truckId,
+        addedBy,
+        date,
+        currentKM,
+        litres,
+        cost,
+        note,
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedDef) {
+      return res.status(404).json({ message: "Def expense not found" });
+    }
+
+    // Fetch all defExpenses for the user after the update
+    // const defExpenses = await getAllDefByTruckHelper(addedBy);
+
+    // Send the response with all defExpenses (including the updated one)
+    res.status(200).json({
+      message: "Def expense updated successfully",
+      defExpense:updatedDef,
+    });
+  } catch (error) {
+    console.error("Error updating def expense:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to update def expense", error: error.message });
+  }
+};
+
 const getAllDefExpensesByTruckId = async (req, res) => {
   try {
     const { truckId, selectedDates } = req.query;
@@ -436,6 +497,7 @@ const downloadAllDefExpensesExcel = async (req, res) => {
 module.exports = {
   addDefExpense,
   getAllDefExpensesByTruckId,
+  updateDefExpenseByTruckId,
   deleteDefExpenseById,
   downloadDefExpensesExcel,
   getAllDefExpensesByUserId,

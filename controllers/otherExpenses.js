@@ -36,6 +36,67 @@ const addOtherExpense = async (req, res) => {
   }
 };
 
+const updateOtherExpenseByTruckId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      truckId,
+      addedBy,
+      other,
+      date,
+      category,
+      cost,
+      note,
+    } = req.body;
+    const file = req.file;
+
+    // Validate the fuel ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid other expense ID" });
+    }
+
+
+    // Update the invoice URL if a new file is provided
+    let invoiceURL = req.body.invoiceURL;
+    if (file) {
+      invoiceURL = await uploadInvoice(file);
+    }
+
+    // Update the def
+    const updatedOtherExpense = await OtherExpense.findByIdAndUpdate(
+      { _id: id },
+      {
+        truckId,
+        addedBy,
+        other,
+        date,
+        category,
+        cost,
+        note,
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedOtherExpense) {
+      return res.status(404).json({ message: "Other expense not found" });
+    }
+
+    // Fetch all otherExpenses for the user after the update
+    // const otherExpenses = await getAllOtherByTruckHelper(addedBy);
+
+    // Send the response with all otherExpenses (including the updated one)
+    res.status(200).json({
+      message: "Other expense updated successfully",
+      otherExpense: updatedOtherExpense,
+    });
+  } catch (error) {
+    console.error("Error updating other expense:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to update other expense", error: error.message });
+  }
+};
+
 const getAllOtherExpensesByTruckId = async (req, res) => {
   try {
     const { truckId, selectedDates } = req.query;
@@ -439,6 +500,7 @@ module.exports = {
   addOtherExpense,
   getAllOtherExpensesByTruckId,
   getAllOtherExpensesByUserId,
+  updateOtherExpenseByTruckId,
   deleteOtherExpenseById,
   downloadOtherExpensesExcel,
   downloadAllOtherExpensesExcel,
