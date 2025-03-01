@@ -191,7 +191,7 @@ const getProfileMetadataByUserId = async (req, res) => {
             {
                 $group: {
                     _id: null, // Group all records into one group
-                    totalKM: { $sum: "$latestKM" } // Sum the latest KM values
+                    totalKM: { $sum: "$latestKM" } // Sum the latestKM values
                 }
             },
 
