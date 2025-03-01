@@ -153,8 +153,7 @@ const getMetadataByUserId = async (req, res) => {
             defTotal,
             otherTotal,
             fuelUsedTotal,
-            // grandTotal: fuelTotal + defTotal + otherTotal,
-            grandTotal: 0,
+            grandTotal: fuelTotal + defTotal + otherTotal,
             monthlyExpenses: {
                 fuel: fuelMonthlyTotal,
                 def: defMonthlyTotal,
@@ -223,8 +222,10 @@ const getProfileMetadataByUserId = async (req, res) => {
 
         // Combine results
         const result = {
-            totalKM,
-            totalTrucks: truckCount,
+            // totalKM,
+            totalKM: 0,
+            // totalTrucks: truckCount,
+            totalTrucks: 0,
             totalDays: daysSinceCreation + 1
         };
 
