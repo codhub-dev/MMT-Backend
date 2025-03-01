@@ -136,27 +136,6 @@ const updateTruck = async (req, res) => {
     }
 }
 
-// const deleteTruckById = async (req, res) => {
-//     try {
-//         const { id } = req.params;
-
-//         if (!mongoose.Types.ObjectId.isValid(id)) {
-//             return res.status(400).json({ message: 'Invalid truck ID' });
-//         }
-
-//         const deletedTruck = await Truck.findByIdAndDelete(id);
-
-//         if (!deletedTruck) {
-//             return res.status(404).json({ message: 'Truck not found' });
-//         }
-
-//         res.status(200).json({ message: 'Truck deleted' });
-//     } catch (error) {
-//         console.error('Error deleting truck:', error);
-//         res.status(500).json({ message: 'Failed to delete truck', error: error.message });
-//     }
-// }
-
 const deleteTruckById = async (req, res) => {
     try {
         const { id } = req.params;
