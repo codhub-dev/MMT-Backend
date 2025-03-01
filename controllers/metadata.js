@@ -58,7 +58,8 @@ const getMetadataByTruckId = async (req, res) => {
             fuelTotal,
             defTotal,
             otherTotal,
-            grandTotal: fuelTotal + defTotal + otherTotal
+            // grandTotal: fuelTotal + defTotal + otherTotal
+            grandTotal: 0
         };
 
         return res.json(totalExpenses);
