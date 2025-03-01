@@ -220,7 +220,7 @@ const getProfileMetadataByUserId = async (req, res) => {
         const today = new Date();
         const daysSinceCreation = Math.floor((today - createdAt) / (1000 * 60 * 60 * 24));
 
-        // Combine results
+        // Combine results to pass to the client
         const result = {
             totalKM,
             totalTrucks: truckCount,
