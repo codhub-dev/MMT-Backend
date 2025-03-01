@@ -174,7 +174,7 @@ const getProfileMetadataByUserId = async (req, res) => {
     const { userId } = req.query;
 
     try {
-        // Step 1: Calculate total kilometers from FuelExpense collection
+        // Calculate total kilometers from FuelExpense collection
         const kmResult = await FuelExpense.aggregate([
             { $match: { addedBy: userId } }, // Match records for the specific user
             { $sort: { truckId: 1, date: -1 } }, // Sort by truckId and date in descending order
