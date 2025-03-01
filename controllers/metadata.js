@@ -222,12 +222,9 @@ const getProfileMetadataByUserId = async (req, res) => {
 
         // Combine results
         const result = {
-            // totalKM,
-            totalKM: 0,
-            // totalTrucks: truckCount,
-            totalTrucks: 0,
-            // totalDays: daysSinceCreation + 1
-            totalDays: 0
+            totalKM,
+            totalTrucks: truckCount,
+            totalDays: daysSinceCreation + 1
         };
 
         res.json(result);
