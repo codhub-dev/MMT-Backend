@@ -226,7 +226,8 @@ const getProfileMetadataByUserId = async (req, res) => {
             totalKM: 0,
             // totalTrucks: truckCount,
             totalTrucks: 0,
-            totalDays: daysSinceCreation + 1
+            // totalDays: daysSinceCreation + 1
+            totalDays: 0
         };
 
         res.json(result);
