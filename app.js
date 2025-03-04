@@ -28,10 +28,18 @@ const metadata = require("./routes/metadata");
 // express app
 const app = express();
 
+const allowedOrigins = process.env.CORS_URLS ? process.env.CORS_URLS : [];
+
 // middlewares
 app.use(
   cors({
-    origin: "*", // Allow requests from any origin
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, origin);
+      } else {
+          callback(new Error("Not allowed by CORS"));
+      }
+  }, // Allow specified domains
     methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"], // Allow specified methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specified headers
     credentials: true, // Allow credentials (cookies, authorization headers)
