@@ -24,6 +24,7 @@ const otherExpensesRoutes = require("./routes/otherExpenses");
 const totalExpensesRoutes = require("./routes/totalExpenses");
 const calculateLoanRoutes = require("./routes/calculateLoan");
 const metadata = require("./routes/metadata");
+const healthRouter = require("./routes/health");
 
 // express app
 const app = express();
@@ -52,6 +53,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // routes
+app.use("/api/v1/app/health", healthRouter);
 app.use("/api/v1/app/auth", authRouter);
 app.use("/api/v1/app/users", isAuthenticated, usersRouter);
 app.use("/api/v1/admin", isAdmin, adminRouter);
