@@ -42,7 +42,7 @@ app.use(
   }, // Allow specified domains
     methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"], // Allow specified methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specified headers
-    credentials: true, // Allow credentials (cookies, authorization headers)
+    credentials: true, // Allow credentials
   })
 );
 app.use(logger("dev"));
