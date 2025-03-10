@@ -41,7 +41,7 @@ app.use(
           callback(new Error("Not allowed by CORS"));
       }
   }, // Allow specified domains
-    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"], // Allow specified methods
+    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"], 
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specified headers
     credentials: true, // Allow credentials
   })
