@@ -7,7 +7,7 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-// middleware handlers
+// middleware handler
 const { error } = require("./utils/error");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const isAdmin = require("./middleware/isAdmin");
