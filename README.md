@@ -1,7 +1,3 @@
-# nalaso-express
+MMT - Backend
 
-## Usage
-
-```sh
-$ npx nalaso-express projectName
-```
+> Express JS
