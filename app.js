@@ -1,5 +1,5 @@
 // packages
-const express = require("expres");
+const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -26,7 +26,7 @@ const calculateLoanRoutes = require("./routes/calculateLoan");
 const metadata = require("./routes/metadata");
 const healthRouter = require("./routes/health");
 
-// express app
+// express apps
 const app = express();
 
 const allowedOrigins = process.env.CORS_URLS ? process.env.CORS_URLS : [];
