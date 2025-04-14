@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "your-docker-image"
-        CONTAINER_NAME = "your-app"
-        APP_URL = "http://your-ec2-instance:your-port/health"
+        IMAGE_NAME = "mmt-backend"
+        CONTAINER_NAME = "mmt-backend-container"
+        APP_URL = "http://35.154.222.198:8080/health/checkHealth"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-repo.git'
+                git 'https://github.com/codhub-dev/MMT-Backend.git'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
                         docker stop ${CONTAINER_NAME} || true
                         docker rm ${CONTAINER_NAME} || true
                         docker pull ${IMAGE_NAME}:latest
-                        docker run -d --name ${CONTAINER_NAME} -p your-port:your-port ${IMAGE_NAME}:latest
+                        docker run -d --name ${CONTAINER_NAME} -p 8000:8000 ${IMAGE_NAME}:latest
                         '
                     """
                 }
