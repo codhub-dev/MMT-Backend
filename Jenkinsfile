@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "mmt-backend"
         CONTAINER_NAME = "mmt-backend-container"
-        APP_URL = "http://35.154.222.198:8080/health/checkHealth"
+        APP_URL = "http://35.154.222.198:8000/api/v1/app/health/checkHealth"
     }
 
     stages {
